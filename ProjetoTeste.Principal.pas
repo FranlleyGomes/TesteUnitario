@@ -21,6 +21,9 @@ type
     [TestCase('CaseCPF', '123.123.123-12,12312312312')]
     [TestCase('CaseCNPJ','12.123.123-0001-12,12123123000112')]
     procedure TratarCPFCNPJ(aValue : String; aResult : String);
+
+    [Test]
+    procedure ValidaNome;
   end;
 
 implementation
@@ -48,8 +51,15 @@ var
    Resultado : String;
 begin
    Resultado :=  FPessoa.TratarCPFCNJP(aValue);
-   Assert.IsTrue(Resultado = aResult, 'TPessoa.TratarCPFCNPJ');
+   //Assert.IsTrue(Resultado = aResult, 'TPessoa.TratarCPFCNPJ');
+   Assert.AreEqual(Resultado, aResult);
 
+end;
+
+procedure TMyTestObject.ValidaNome;
+begin
+   FPessoa.Nome := 'Franlley';
+   Assert.IsNotEmpty(FPessoa.Nome, 'TPessoa.Nome está retornando vázio');
 end;
 
 initialization

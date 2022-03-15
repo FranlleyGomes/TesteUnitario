@@ -19,7 +19,7 @@ begin
   for I := 1 to Length(aValue) do
     begin
         if aValue[I]in ['0','1','2','3','4','5','6','7','8','9'] then
-           Result := Result + aValue[I];
+           Result := Result + aValue[I] + 'x';
 
     end;
 

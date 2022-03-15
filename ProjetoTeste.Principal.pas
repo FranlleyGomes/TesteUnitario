@@ -24,6 +24,9 @@ type
 
     [Test]
     procedure ValidaNome;
+
+    [Test]
+    Procedure ValidarCampos;
   end;
 
 implementation
@@ -60,6 +63,13 @@ procedure TMyTestObject.ValidaNome;
 begin
    FPessoa.Nome := 'Franlley';
    Assert.IsNotEmpty(FPessoa.Nome, 'TPessoa.Nome está retornando vázio');
+end;
+
+procedure TMyTestObject.ValidarCampos;
+begin
+   FPessoa.Nome := '';
+   Assert.WillRaise( FPessoa.ValidarCampos, nil, 'TPessoa.ValidarCampos');
+
 end;
 
 initialization

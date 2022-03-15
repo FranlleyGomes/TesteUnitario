@@ -17,6 +17,10 @@ type
     procedure TearDown;
     [Test]
     procedure TesteTratarCPFCNPJ;
+    [Test]
+    [TestCase('CaseCPF', '123.123.123-12,12312312312')]
+    [TestCase('CaseCNPJ','12.123.123-0001-12,12123123000112')]
+    procedure TratarCPFCNPJ(aValue : String; aResult : String);
   end;
 
 implementation
@@ -37,6 +41,15 @@ var
 begin
   Resultado :=  FPessoa.TratarCPFCNJP('123.123.123-12');
   Assert.IsTrue(Resultado = '12312312312','TPessoa.TratarCPFCNPJ retornou um erro');
+end;
+
+procedure TMyTestObject.TratarCPFCNPJ(aValue, aResult: String);
+var
+   Resultado : String;
+begin
+   Resultado :=  FPessoa.TratarCPFCNJP(aValue);
+   Assert.IsTrue(Resultado = aResult, 'TPessoa.TratarCPFCNPJ');
+
 end;
 
 initialization

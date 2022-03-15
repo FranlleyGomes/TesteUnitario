@@ -10,12 +10,17 @@ type
   private
     FNome: String;
     procedure SetNome(const Value: String);
+    public
+    Procedure ValidarCampos;
   published
     function TratarCPFCNJP(aValue: String): String;
     property Nome : String read FNome write SetNome;
   end;
 
 implementation
+
+uses
+  System.SysUtils;
 
 { TPessoa }
 
@@ -35,8 +40,12 @@ begin
 
     end;
 
-    Result := Result + 'X';
+end;
 
+procedure TPessoa.ValidarCampos;
+begin
+    if FNome = '' then
+      raise Exception.Create('Nome não pode ficar vazio');
 end;
 
 end.

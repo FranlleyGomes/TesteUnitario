@@ -8,18 +8,19 @@ type
   private
     FNome: String;
     FDATAALTERACAO: TDateTime;
-    FSTATUS: Integer;
     FSENHA: String;
     FDATACADASTRO: TDateTime;
     FGUUID: String;
-    FTIPO: String;
+    FSTATUS: Integer;
+    FTIPO: Integer;
+
     procedure SetNome(const Value: String);
     procedure SetDATAALTERACAO(const Value: TDateTime);
     procedure SetDATACADASTRO(const Value: TDateTime);
     procedure SetGUUID(const Value: String);
     procedure SetSENHA(const Value: String);
     procedure SetSTATUS(const Value: Integer);
-    procedure SetTIPO(const Value: String);
+    procedure SetTIPO(const Value: Integer);
   public
     Procedure ValidarCampos;
   published
@@ -27,7 +28,7 @@ type
     property Nome: String read FNome write SetNome;
     property GUUID: String read FGUUID write SetGUUID;
     property SENHA: String read FSENHA write SetSENHA;
-    property TIPO: String read FTIPO write SetTIPO;
+    property TIPO: Integer read FTIPO write SetTIPO;
     property STATUS: Integer read FSTATUS write SetSTATUS;
     property DATACADASTRO: TDateTime read FDATACADASTRO write SetDATACADASTRO;
     property DATAALTERACAO: TDateTime read FDATAALTERACAO
@@ -71,7 +72,8 @@ begin
   FSTATUS := Value;
 end;
 
-procedure TPessoa.SetTIPO(const Value: String);
+
+procedure TPessoa.SetTIPO(const Value: Integer);
 begin
   FTIPO := Value;
 end;
@@ -91,8 +93,8 @@ end;
 
 procedure TPessoa.ValidarCampos;
 begin
-  if FNome = '' then
-    raise Exception.Create('Nome não pode ficar vazio');
+ // if FNome = '' then
+ //   raise Exception.Create('Nome não pode ficar vazio');
 end;
 
 end.

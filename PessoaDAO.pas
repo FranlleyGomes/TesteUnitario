@@ -45,6 +45,9 @@ constructor TPessoaDAO.Create;
 begin
    FPessoa := TPessoa.Create;
 
+   if not Assigned(DataModule1) then
+      DataModule1 := TDataModule1.Create(nil);
+
    FQuery := DataModule1.FDQuery1;
 end;
 
@@ -99,8 +102,8 @@ end;
 
 procedure TPessoaDAO.ValidarCampos;
 begin
-  if FPessoa.Nome = '' then
-     raise Exception.Create('Nome não ode ser Vazio');
+ // if FPessoa.Nome = '' then
+  //   raise Exception.Create('Nome não ode ser Vazio');
 end;
 
 end.

@@ -14,13 +14,19 @@ type
      procedure GravarLogo(aLog : String);
    end;
 
+   iSession = interface
+     ['{7DA1462E-8F08-4F54-8E56-E8DE3D89CE30}']
+     function User: String;
+   end;
+
   TPessoaDAO = class
   private
     FLog : iLog;
+    FSession : iSession;
     FPessoa: TPessoa;
     FQuery: TFDQuery;
   public
-    constructor Create (aLog : iLog);
+    constructor Create (aLog : iLog; aSession: iSession);
     destructor Destroy; override;
     function Entidade: TPessoa;
     procedure ValidarCampos;
@@ -50,9 +56,13 @@ begin
   FPessoa.DATAALTERACAO := FQuery.FieldByName('DATAALTERACAO').AsDateTime;
 end;
 
-constructor TPessoaDAO.Create(aLog : iLog);
+constructor TPessoaDAO.Create(aLog : iLog; aSession : iSession);
 begin
    FLog := aLog;
+   FSession := iSession;
+
+   FLog.GravarLogo('User:' + aSession.User);
+
    FPessoa := TPessoa.Create;
 
    if not Assigned(DataModule1) then

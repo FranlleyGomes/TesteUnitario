@@ -2,16 +2,25 @@ unit PessoaDAO;
 
 interface
 
+{$M+}
+
 uses
   Pessoa, FireDAC.Comp.Client;
 
 type
+
+   iLog = interface
+     ['{31990ECF-ABBD-4148-9A30-18A269A5DAC5}']
+     procedure GravarLogo(aLog : String);
+   end;
+
   TPessoaDAO = class
   private
+    FLog : iLog;
     FPessoa: TPessoa;
     FQuery: TFDQuery;
   public
-    constructor Create;
+    constructor Create (aLog : iLog);
     destructor Destroy; override;
     function Entidade: TPessoa;
     procedure ValidarCampos;
@@ -24,7 +33,7 @@ type
 implementation
 
 uses
-  Conexao, System.SysUtils;
+  Conexao, System.SysUtils, Delphi.Mocks;
 
 { TPessoaDAO }
 
@@ -41,8 +50,9 @@ begin
   FPessoa.DATAALTERACAO := FQuery.FieldByName('DATAALTERACAO').AsDateTime;
 end;
 
-constructor TPessoaDAO.Create;
+constructor TPessoaDAO.Create(aLog : iLog);
 begin
+   FLog := aLog;
    FPessoa := TPessoa.Create;
 
    if not Assigned(DataModule1) then

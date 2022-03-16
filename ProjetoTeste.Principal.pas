@@ -36,12 +36,12 @@ type
 implementation
 
 uses
-  System.SysUtils;
+  System.SysUtils, Delphi.Mocks;
 
 procedure TMyTestObject.Insert;
 begin
   Try
-   FPessoaDAO.Entidade.GUUID := '999999';
+  FPessoaDAO.Entidade.GUUID := '999999';
   FPessoaDAO.Entidade.Nome  := '999999';
   FPessoaDAO.Entidade.SENHA := '999999';
   FPessoaDAO.Entidade.TIPO  := 9;
@@ -70,7 +70,7 @@ end;
 procedure TMyTestObject.Setup;
 begin
   FPessoa := TPessoa.Create;
-  FPessoaDAO := TPESSOADAO.Create;
+  FPessoaDAO := TPESSOADAO.Create(TStub<iLog>.Create);
 end;
 
 procedure TMyTestObject.TearDown;

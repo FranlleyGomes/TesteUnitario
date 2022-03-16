@@ -93,8 +93,8 @@ end;
 
 procedure TPessoa.ValidarCampos;
 begin
- // if FNome = '' then
- //   raise Exception.Create('Nome não pode ficar vazio');
+  if FNome = '' then
+   raise Exception.Create('Nome não pode ficar vazio');
 end;
 
 end.
